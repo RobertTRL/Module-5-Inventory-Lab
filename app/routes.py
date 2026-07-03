@@ -21,3 +21,5 @@ def get_item_by_id(item_id):
         return jsonify({"error": "Item not found"}), 404
     
     return jsonify(item), 200
+
+@inventory_bp.route("/", methods=["POST"])
