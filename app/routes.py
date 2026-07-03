@@ -32,8 +32,8 @@ def create_item():
     payload = data.create_product(
         product_name=body_data["product_name"],
         brands=body_data["brands"],
+        price=body_data["price"],
         ingredients_text=body_data.get("ingredients_text", ""),
         barcode=body_data.get("barcode", ""),
-        price=body_data.get("price", 0.0),
-        stock_quantity=body_data.get("stock_quantity", 0),
+        stock_quantity=body_data.get("stock_quantity", 1),
     )
