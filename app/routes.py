@@ -37,3 +37,5 @@ def create_item():
         barcode=body_data.get("barcode", ""),
         stock_quantity=body_data.get("stock_quantity", 1),
     )
+
+@inventory_bp.route("/<int:item_id>", methods=["PATCH"])
