@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
-from app import data
+from app import data, openfoodfacts
 
 inventory_bp = Blueprint("inventory", __name__)
 
 # GET /inventory → Fetch all items
 # GET /inventory/<id> → Fetch a single item
 # POST /inventory → Add a new item
+# POST /inventory/<barcode> → Retrieves the item with the barcode and adds it
 # PATCH /inventory/<id> → Update an item
 # DELETE /inventory/<id> → Remove an item
 
