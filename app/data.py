@@ -7,7 +7,6 @@ inventory = [
         "ingredients_text": "Filtered water, almonds, cane sugar, sea salt, ...",
         "price": 4.99,
         "stock": 20,
-        "source": "manual"
     },
     {
         "id": 2,
@@ -17,7 +16,6 @@ inventory = [
         "ingredients_text": "Roasted peanuts, sugar, molasses, salt",
         "price": 3.49,
         "stock": 15,
-        "source": "manual"
     }
 ]
 
@@ -25,7 +23,7 @@ next_id = 3
 
 def create_product(product_name, brands, ingredients_text="", barcode="", price=0.0, stock_quantity=0):
     global next_id
-    
+
     item = {
         "id": next_id,
         "product_name": product_name,
