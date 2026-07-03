@@ -39,3 +39,21 @@ def create_item():
     )
 
 @inventory_bp.route("/<int:item_id>", methods=["PATCH"])
+def update_item(item_id):
+    item = next((i for i in data.inventory if i.id == item_id), None)
+
+    if not item:
+        return jsonify({"error": "Item not found"}), 404
+    
+    body_data = request.get_json()
+
+    if not body_data:
+        return jsonify({"error": "No data provided"}), 400
+    
+    allowed_fields = ["product_name", "brands", "price", "ingredients_text", "barcode", "stock_quantity"]
+
+    for field in allowed_fields:
+        if field in body_data:
+            item[field] = body_data[field]
+    
+    return jsonify(item), 200
