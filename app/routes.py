@@ -39,6 +39,8 @@ def create_item():
         stock_quantity=body_data.get("stock_quantity", 1),
     )
 
+@inventory_bp.route("/lookup/<barcode>", methods=["POST"])
+
 @inventory_bp.route("/<int:item_id>", methods=["PATCH"])
 def update_item(item_id):
     item = next((i for i in data.inventory if i.id == item_id), None)
