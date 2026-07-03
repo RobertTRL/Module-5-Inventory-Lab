@@ -12,3 +12,5 @@ inventory_bp = Blueprint("inventory", __name__)
 @inventory_bp.route("/", methods=["GET"])
 def get_all_items():
     return jsonify(data.inventory), 200
+
+@inventory_bp.route("/<int:item_id>", methods=["GET"])
