@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+instance/
+.flaskenv
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+*.swp
+*~
