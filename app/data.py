@@ -21,7 +21,7 @@ inventory = [
 
 next_id = 3
 
-def create_product(product_name, brands, ingredients_text="", barcode="", price=0.0, stock_quantity=0):
+def create_product(product_name, brands, price, ingredients_text="", barcode="", stock_quantity=1):
     global next_id
 
     item = {
