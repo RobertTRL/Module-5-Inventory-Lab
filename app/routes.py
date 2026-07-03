@@ -57,3 +57,6 @@ def update_item(item_id):
             item[field] = body_data[field]
     
     return jsonify(item), 200
+
+@inventory_bp.route("/<int:item_id>", methods=["DELETE"])
+
