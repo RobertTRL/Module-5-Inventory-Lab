@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.data import create_product
+from app import data
 
 inventory_bp = Blueprint("inventory", __name__)
 
