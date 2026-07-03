@@ -22,3 +22,20 @@ inventory = [
 ]
 
 next_id = 3
+
+def create_product(product_name, brands, ingredients_text="", barcode="", price=0.0, stock_quantity=0):
+    global next_id
+    
+    item = {
+        "id": next_id,
+        "product_name": product_name,
+        "brands": brands,
+        "ingredients_text": ingredients_text,
+        "barcode": barcode,
+        "price": price,
+        "stock_quantity": stock_quantity,
+    }
+
+    inventory.append(item)
+    next_id += 1
+    return item
