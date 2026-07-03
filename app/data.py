@@ -20,3 +20,5 @@ inventory = [
         "source": "manual"
     }
 ]
+
+next_id = 3
