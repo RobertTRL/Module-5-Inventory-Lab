@@ -23,3 +23,17 @@ def get_item_by_id(item_id):
     return jsonify(item), 200
 
 @inventory_bp.route("/", methods=["POST"])
+def create_item():
+    body_data = request.get_json()
+
+    if not body_data or "product_name" not in body_data or "brands" not in body_data or "price" not in body_data:
+        return jsonify({"error": "product_name, brands and/or price are required"}), 400
+    
+    payload = data.create_product(
+        product_name=body_data["product_name"],
+        brands=body_data["brands"],
+        ingredients_text=body_data.get("ingredients_text", ""),
+        barcode=body_data.get("barcode", ""),
+        price=body_data.get("price", 0.0),
+        stock_quantity=body_data.get("stock_quantity", 0),
+    )
