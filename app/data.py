@@ -37,3 +37,14 @@ def create_product(product_name, brands, price, ingredients_text="", barcode="",
     inventory.append(item)
     next_id += 1
     return item
+
+def create_from_api_data(api_data, price=0.0, stock_quantity=0):
+
+    return create_product(
+        product_name=api_data["product_name"],
+        brands=api_data["brands"],
+        ingredients_text=api_data["ingredients_text"],
+        barcode=api_data["barcode"],
+        price=price,
+        stock_quantity=stock_quantity,
+    )

@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
-from app import data
+from app import data, openfoodfacts
 
 inventory_bp = Blueprint("inventory", __name__)
 
 # GET /inventory → Fetch all items
 # GET /inventory/<id> → Fetch a single item
 # POST /inventory → Add a new item
+# POST /inventory/<barcode> → Retrieves the item with the barcode and adds it
 # PATCH /inventory/<id> → Update an item
 # DELETE /inventory/<id> → Remove an item
 
@@ -37,6 +38,21 @@ def create_item():
         barcode=body_data.get("barcode", ""),
         stock_quantity=body_data.get("stock_quantity", 1),
     )
+
+@inventory_bp.route("/lookup/<barcode>", methods=["POST"])
+def lookup_and_add(barcode):
+    api_data = openfoodfacts.fetch_by_barcode(barcode)
+    if api_data is None:
+        return jsonify({"error": "Product not found on OpenFoodFacts"}), 404
+
+    body = request.get_json(silent=True) or {}
+    item = data.create_from_offdata(
+        api_data,
+        price=body.get("price", 0.0),
+        stock_quantity=body.get("stock_quantity", 0),
+    )
+    
+    return jsonify(item), 201    
 
 @inventory_bp.route("/<int:item_id>", methods=["PATCH"])
 def update_item(item_id):
