@@ -50,7 +50,7 @@ def view_specific_item(args):
         print("Request has failed!")
         return
 
-    response.json()
+    print(response.json())
 
 def add_item(args):
     payload = {
@@ -69,7 +69,7 @@ def add_item(args):
         return
     
     print("Item added:")
-    response.json()
+    print(response.json())
 
 def edit_item(args):
     field_map = {
@@ -97,5 +97,15 @@ def edit_item(args):
         return
     
     print("Item updated:")
-    response.json()
+    print(response.json())
+
+def delete_item(args):
+    response = handle_request("DELETE", f"{BASE_URL}/{args.id}")
+
+    if not response:
+        print("Request has failed!")
+        return
+    
+    print("Item deleted:")
+    print(response.json())
            
