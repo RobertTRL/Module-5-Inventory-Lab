@@ -25,7 +25,7 @@ def get_item_by_id(item_id):
 
 @inventory_bp.route("", methods=["POST"])
 def create_item():
-    body_data = request.get_json()
+    body_data = request.get_json(silent=True)
 
     if not body_data or "product_name" not in body_data or "brands" not in body_data or "price" not in body_data:
         return jsonify({"error": "product_name, brands and/or price are required"}), 400
@@ -63,7 +63,7 @@ def update_item(item_id):
     if not item:
         return jsonify({"error": "Item not found"}), 404
     
-    body_data = request.get_json()
+    body_data = request.get_json(silent=True)
 
     if not body_data:
         return jsonify({"error": "No data provided"}), 400
