@@ -124,4 +124,56 @@ def fetch_and_add(args):
 
     print("Item added from OpenFoodFacts:")
     print(response.json())
+
+def build_parser():
+    parser = argparse.ArgumentParser(description="Inventory management CLI")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    p_view_all = subparsers.add_parser("view-all", help="View all inventory items")
+    p_view_all.set_defaults(func=view_all_items)
+
+    p_view = subparsers.add_parser("view", help="View a single item by ID")
+    p_view.add_argument("id", type=int)
+    p_view.set_defaults(func=view_specific_item)
+
+    p_add = subparsers.add_parser("add", help="Add a new item manually")
+    p_add.add_argument("--name", required=True)
+    p_add.add_argument("--brand", required=True)
+    p_add.add_argument("--ingredients", default="")
+    p_add.add_argument("--barcode", default="")
+    p_add.add_argument("--price", type=float, default=0.0)
+    p_add.add_argument("--stock", type=int, default=0)
+    p_add.set_defaults(func=add_item)
+
+    p_edit = subparsers.add_parser("edit", help="Update one or more fields for an item")
+    p_edit.add_argument("id", type=int)
+    p_edit.add_argument("--name", default=None)
+    p_edit.add_argument("--brand", default=None)
+    p_edit.add_argument("--ingredients", default=None)
+    p_edit.add_argument("--barcode", default=None)
+    p_edit.add_argument("--price", type=float, default=None)
+    p_edit.add_argument("--stock", type=int, default=None)
+    p_edit.set_defaults(func=edit_item)
+
+    p_delete = subparsers.add_parser("delete", help="Delete an item by ID")
+    p_delete.add_argument("id", type=int)
+    p_delete.set_defaults(func=delete_item)
+
+    p_lookup = subparsers.add_parser("lookup", help="Find item on OpenFoodFacts and add to inventory")
+    p_lookup.add_argument("barcode")
+    p_lookup.add_argument("--price", type=float, default=None)
+    p_lookup.add_argument("--stock", type=int, default=None)
+    p_lookup.set_defaults(func=fetch_and_add)
+
+    return parser
+
+
+def main():
+    parser = build_parser()
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()    
        
