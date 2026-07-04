@@ -39,6 +39,8 @@ def create_item():
         stock_quantity=body_data.get("stock_quantity", 1),
     )
 
+    return jsonify(payload), 201
+
 @inventory_bp.route("/lookup/<barcode>", methods=["POST"])
 def lookup_and_add(barcode):
     api_data = openfoodfacts.fetch_by_barcode(barcode)
