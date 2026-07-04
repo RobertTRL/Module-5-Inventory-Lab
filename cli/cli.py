@@ -2,7 +2,6 @@ import requests, argparse
 
 BASE_URL = "http://127.0.0.1:5000/inventory"
 
-# Print item -> prints relevent fields for an item
 # Handle request -> handles various requests, takes request and url as args
 # view all items -> retrieves all data from inventory
 # view specific item -> retrieves data with the id specified
@@ -10,15 +9,6 @@ BASE_URL = "http://127.0.0.1:5000/inventory"
 # edit item -> edits an already existing item with the fields specified
 # delete item -> deletes an already existing item with the id specified
 # lookup and add -> retrieves an item from the external api using a barcode, adds it to the inventory
-
-def print_item(item):
-    print(f"\nID: {item['id']}")
-    print(f"  Name:        {item['product_name']}")
-    print(f"  Brand:       {item.get('brands', 'N/A')}")
-    print(f"  Barcode:     {item.get('barcode', 'N/A')}")
-    print(f"  Price:       ${item.get('price', 0):.2f}")
-    print(f"  Stock:       {item.get('stock_quantity', 0)}")
-    print(f"  Ingredients: {item.get('ingredients_text', 'N/A')}")
 
 def handle_request(method, url, **kwargs):
     try:
