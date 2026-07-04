@@ -8,7 +8,7 @@ BASE_URL = "http://127.0.0.1:5000/inventory"
 # add item -> adds a new item
 # edit item -> edits an already existing item with the fields specified
 # delete item -> deletes an already existing item with the id specified
-# lookup and add -> retrieves an item from the external api using a barcode, adds it to the inventory
+# fetch and add -> retrieves an item from the external api using a barcode, adds it to the inventory
 
 def handle_request(method, url, **kwargs):
     try:
@@ -108,4 +108,18 @@ def delete_item(args):
     
     print("Item deleted:")
     print(response.json())
-           
+
+def fetch_and_add(args):
+    response = handle_request("GET", f"{BASE_URL}/{args.barcode}")
+
+    if not response:
+        return
+    
+    results = response.json()
+
+    if results.status != 1:
+        print("No item found.")
+        return
+    
+    print(results)
+       
