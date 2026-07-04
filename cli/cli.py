@@ -37,3 +37,19 @@ def handle_request(method, url, **kwargs):
         return None
 
     return response
+
+def view_all_items(args):
+    response = handle_request("GET", BASE_URL)
+
+    if not response:
+        print("Request has failed!")
+        return
+    
+    items = response.json()
+
+    if not items:
+        print("Inventory is empty")
+        return
+    
+    for item in items:
+        print_item(item)
