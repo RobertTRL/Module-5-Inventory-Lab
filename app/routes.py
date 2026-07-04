@@ -46,7 +46,7 @@ def lookup_and_add(barcode):
         return jsonify({"error": "Product not found on OpenFoodFacts"}), 404
 
     body = request.get_json(silent=True) or {}
-    item = data.create_from_offdata(
+    item = data.create_from_api_data(
         api_data,
         price=body.get("price", 0.0),
         stock_quantity=body.get("stock_quantity", 0),
