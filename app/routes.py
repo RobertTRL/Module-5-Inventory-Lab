@@ -10,7 +10,7 @@ inventory_bp = Blueprint("inventory", __name__)
 # PATCH /inventory/<id> → Update an item
 # DELETE /inventory/<id> → Remove an item
 
-@inventory_bp.route("/", methods=["GET"])
+@inventory_bp.route("", methods=["GET"])
 def get_all_items():
     return jsonify(data.inventory), 200
 
@@ -23,7 +23,7 @@ def get_item_by_id(item_id):
     
     return jsonify(item), 200
 
-@inventory_bp.route("/", methods=["POST"])
+@inventory_bp.route("", methods=["POST"])
 def create_item():
     body_data = request.get_json()
 
