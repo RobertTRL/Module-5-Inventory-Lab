@@ -2,6 +2,15 @@ import requests, argparse
 
 BASE_URL = "http://127.0.0.1:5000/inventory"
 
+# Print item -> prints relevent fields for an item
+# Handle request -> handles various requests, takes request and url as args
+# view all items -> retrieves all data from inventory
+# view specific item -> retrieves data with the id specified
+# add item -> adds a new item
+# edit item -> edits an already existing item with the fields specified
+# delete item -> deletes an already existing item with the id specified
+# lookup and add -> retrieves an item from the external api using a barcode, adds it to the inventory
+
 def print_item(item):
     print(f"\nID: {item['id']}")
     print(f"  Name:        {item['product_name']}")
