@@ -16,7 +16,7 @@ def get_all_items():
 
 @inventory_bp.route("/<int:item_id>", methods=["GET"])
 def get_item_by_id(item_id):
-    item = next((i for i in data.inventory if i.id == item_id), None)
+    item = next((i for i in data.inventory if i["id"] == item_id), None)
 
     if not item:
         return jsonify({"error": "Item not found"}), 404
@@ -56,7 +56,7 @@ def lookup_and_add(barcode):
 
 @inventory_bp.route("/<int:item_id>", methods=["PATCH"])
 def update_item(item_id):
-    item = next((i for i in data.inventory if i.id == item_id), None)
+    item = next((i for i in data.inventory if i["id"] == item_id), None)
 
     if not item:
         return jsonify({"error": "Item not found"}), 404
@@ -76,7 +76,7 @@ def update_item(item_id):
 
 @inventory_bp.route("/<int:item_id>", methods=["DELETE"])
 def delete_item(item_id):
-    item_index = next((i for i, item in enumerate(data.inventory) if i.id == item_id), None)
+    item_index = next((i for i, item in enumerate(data.inventory) if i["id"] == item_id), None)
 
     if not item_index:
         return jsonify({"error": "Item not found"}), 404
