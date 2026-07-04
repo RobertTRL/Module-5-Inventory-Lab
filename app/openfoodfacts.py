@@ -15,7 +15,7 @@ def fetch_by_barcode(barcode):
 
     data = response.json()
 
-    if data.get("status") != 1:
+    if data.get("status") != "success":
         return None
 
     product = data.get("product", {})
