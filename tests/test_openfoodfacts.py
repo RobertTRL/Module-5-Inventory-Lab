@@ -18,7 +18,7 @@ def _mock_response(json_data, status_code=200, raise_error=None):
 @patch("app.openfoodfacts.requests.get")
 def test_fetch_by_barcode_found(mock_get):
     mock_get.return_value = _mock_response({
-        "status": 1,
+        "status": "success",
         "product": {
             "product_name": "Nutella",
             "brands": "Ferrero",
@@ -37,7 +37,7 @@ def test_fetch_by_barcode_found(mock_get):
 
 @patch("app.openfoodfacts.requests.get")
 def test_fetch_by_barcode_not_found(mock_get):
-    mock_get.return_value = _mock_response({"status": 0})
+    mock_get.return_value = _mock_response({"status": "failure"})
 
     result = openfoodfacts.fetch_by_barcode("0000000000000")
 
@@ -47,8 +47,8 @@ def test_fetch_by_barcode_not_found(mock_get):
 @patch("app.openfoodfacts.requests.get")
 def test_fetch_by_barcode_missing_fields_uses_defaults(mock_get):
     mock_get.return_value = _mock_response({
-        "status": 1,
-        "product": {}, 
+        "status": "success",
+        "product": {},
     })
 
     result = openfoodfacts.fetch_by_barcode("1234567890123")
