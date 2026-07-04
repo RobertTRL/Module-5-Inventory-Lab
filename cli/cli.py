@@ -110,16 +110,18 @@ def delete_item(args):
     print(response.json())
 
 def fetch_and_add(args):
-    response = handle_request("GET", f"{BASE_URL}/{args.barcode}")
+    payload = {}
+    if args.price is not None:
+        payload["price"] = args.price
+    if args.stock is not None:
+        payload["stock_quantity"] = args.stock
+
+    response = handle_request("POST", f"{BASE_URL}/lookup/{args.barcode}", json=payload)
 
     if not response:
+        print("Request has failed!")
         return
-    
-    results = response.json()
 
-    if results.status != 1:
-        print("No item found.")
-        return
-    
-    print(results)
+    print("Item added from OpenFoodFacts:")
+    print(response.json())
        
