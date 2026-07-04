@@ -61,4 +61,24 @@ def view_specific_item(args):
         print("Request has failed!")
         return
 
-    print_item(response.json())        
+    print_item(response.json())
+
+def add_item(args):
+    payload = {
+        "product_name": args.name,
+        "brands": args.brand,
+        "ingredients_text": args.ingredients or "",
+        "barcode": args.barcode or "",
+        "price": args.price,
+        "stock_quantity": args.stock,
+    }
+
+    response = handle_request("POST", BASE_URL, json=payload)
+
+    if not response:
+        print("Request has failed!")
+        return
+    
+    print("Item added:")
+    print_item(response.json())
+           
