@@ -41,8 +41,7 @@ def view_all_items(args):
         print("Inventory is empty")
         return
     
-    for item in items:
-        print_item(item)
+    print(items)
 
 def view_specific_item(args):
     response = handle_request("GET", f"{BASE_URL}/{args.id}")
@@ -51,7 +50,7 @@ def view_specific_item(args):
         print("Request has failed!")
         return
 
-    print_item(response.json())
+    response.json()
 
 def add_item(args):
     payload = {
@@ -70,5 +69,5 @@ def add_item(args):
         return
     
     print("Item added:")
-    print_item(response.json())
+    response.json()
            
