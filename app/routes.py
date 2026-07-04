@@ -84,4 +84,4 @@ def delete_item(item_id):
         return jsonify({"error": "Item not found"}), 404
     
     deleted_item = data.inventory.pop(item_index)
-    return jsonify(deleted_item), 201
+    return jsonify(deleted_item), 200
