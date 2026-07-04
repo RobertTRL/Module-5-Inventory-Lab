@@ -76,7 +76,7 @@ def update_item(item_id):
 
 @inventory_bp.route("/<int:item_id>", methods=["DELETE"])
 def delete_item(item_id):
-    item_index = next((i for i, item in enumerate(data.inventory) if i["id"] == item_id), None)
+    item_index = next((i for i, item in enumerate(data.inventory) if item["id"] == item_id), None)
 
     if not item_index:
         return jsonify({"error": "Item not found"}), 404
