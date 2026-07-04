@@ -53,3 +53,12 @@ def view_all_items(args):
     
     for item in items:
         print_item(item)
+
+def view_specific_item(args):
+    response = handle_request("GET", f"{BASE_URL}/{args.id}")
+
+    if not response:
+        print("Request has failed!")
+        return
+
+    print_item(response.json())        
