@@ -78,7 +78,7 @@ def update_item(item_id):
 def delete_item(item_id):
     item_index = next((i for i, item in enumerate(data.inventory) if item["id"] == item_id), None)
 
-    if not item_index:
+    if item_index is None:
         return jsonify({"error": "Item not found"}), 404
     
     deleted_item = data.inventory.pop(item_index)
