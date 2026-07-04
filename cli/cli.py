@@ -70,4 +70,32 @@ def add_item(args):
     
     print("Item added:")
     response.json()
+
+def edit_item(args):
+    field_map = {
+        "name": "product_name",
+        "brand": "brands",
+        "ingredients": "ingredients_text",
+        "barcode": "barcode",
+        "price": "price",
+        "stock": "stock_quantity",
+    }
+
+    payload = {
+        api_field: getattr(args, cli_field)
+        for cli_field, api_field in field_map.items()
+        if getattr(args, cli_field) is not None
+    }
+
+    if not payload:
+        print("Provide at least one field to update (--name, --brand, --ingredients, --barcode, --price, --stock).")
+        return
+
+    response = handle_request("PATCH", f"{BASE_URL}/{args.id}", json=payload)
+    if not response:
+        print("Request has failed!")
+        return
+    
+    print("Item updated:")
+    response.json()
            
