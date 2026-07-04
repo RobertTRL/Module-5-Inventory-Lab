@@ -6,7 +6,7 @@ inventory = [
         "barcode": "0025293001453",
         "ingredients_text": "Filtered water, almonds, cane sugar, sea salt, ...",
         "price": 4.99,
-        "stock": 20,
+        "stock_quantity": 20,
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@ inventory = [
         "barcode": "0051500255162",
         "ingredients_text": "Roasted peanuts, sugar, molasses, salt",
         "price": 3.49,
-        "stock": 15,
+        "stock_quantity": 15,
     }
 ]
 
